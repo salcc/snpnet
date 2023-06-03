@@ -605,10 +605,16 @@ computeMetric <- function(pred, response, metric.type) {
             d <- glmnet::coxnet.deviance(p, response)
             1 - d/d0
         })
-    } else if (metric.type == 'C'){
+    } else if (metric.type == 'C') {
       metric <- apply(pred, 2, function(p) {
         cindex::CIndex(p, response[,1], response[,2])
       })
+    } else if (metric.type == 'balanced.accuracy') {
+      metric <- apply(pred, 2, function(p) {
+        caret::confusionMatrix(factor(as.numeric(p > 0.5)), factor(response))$byClass['Balanced Accuracy']
+      })
+    } else {
+        stop(paste0('The specified metric (', metric.type, ') is not supported!'))
     }
     metric
 }
