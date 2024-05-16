@@ -10,9 +10,12 @@ License: GPL-2
 Most of the requirements of snpnet are available from CRAN. It also depends on the `pgenlibr`, `glmnet/glmnetPlus` and `cindex` (for survival analysis) packages. One can install them by running the following commands in R. Notice that the installation of `pgenlibr` requires [zstd(>=1.4.4)](https://github.com/facebook/zstd). It can be built from source or simply available from [conda](https://anaconda.org/conda-forge/zstd), [pip](https://pypi.org/project/zstd/) or [brew](https://formulae.brew.sh/formula/zstd).
 
 ```r
+install.packages("devtools", repos = "http://cran.us.r-project.org", Ncpus=8)
 library(devtools)
-install_github("junyangq/glmnetPlus")
-install_github("chrchang/plink-ng", subdir="/2.0/cindex")
-install_github("chrchang/plink-ng", subdir="/2.0/pgenlibr")
+install_github("junyangq/glmnetPlus", Ncpus=8)
+install_github("chrchang/plink-ng", subdir="/2.0/cindex", Ncpus=8)
+install_github("chrchang/plink-ng", subdir="/2.0/pgenlibr", Ncpus=8)
+install_github("salcc/snpnet", Ncpus=8)
+library(snpnet)
 ```
 We assume the users already have PLINK 2.0. Otherwise it can be installed from https://www.cog-genomics.org/plink/2.0/.
